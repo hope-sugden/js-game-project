@@ -21,3 +21,68 @@ const quizQuestions = [
     {image:"./Images/henry.jpeg", question:"How many of Henry VIII’s wives were called Anne?", option1:"1" ,option2:"2",option3:"3", option4:"4",correctAnswer:"2" },
     {image:"./Images/ravens.jpeg", question:"What is a group of ravens known as?", option1:"Unkindness" ,option2:"Cast",option3:"Pandemonium", option4:"Rafter",correctAnswer:"Unkindness" }
 ]
+
+
+const quizImage = document.querySelector(".quiz_image.src");
+const quizQuestion = document.querySelector(".quiz_question");
+const option1 = document.querySelector(".quiz_option1");
+const option2 = document.querySelector(".quiz_option2");
+const option3 = document.querySelector(".quiz_option3");
+const option4 = document.querySelector(".quiz_option4");
+const answerButtons = document.querySelectorAll(".answerButtons");
+const startButton = document.querySelector(".homepage_startButton");
+const resultMessage = document.querySelector(".result_message");
+const quizSection = document.querySelector(".quiz");
+quizSection.style.display = "none";
+
+
+startButton.addEventListener("click", () => {
+    startQuiz();
+    quizSection.style.display = "block";
+})
+
+const startQuiz = () => {
+    const homepage = document.querySelector(".homepage");
+    console.log("startquiz");
+    homepage.remove();
+}
+
+// quizImage = quizQuestions[0].image;
+quizQuestion.innerHTML = quizQuestions[0].question;
+option1.innerHTML = quizQuestions[0].option1;
+option2.innerHTML = quizQuestions[0].option2;
+option3.innerHTML = quizQuestions[0].option3;
+option4.innerHTML = quizQuestions[0].option4;
+
+answerButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        // loop to next index in the questions array
+        quizQuestions.forEach(question => {
+            quizQuestion.innerHTML = quizQuestions[question].question;
+            option1.innerHTML = quizQuestions[question].option1;
+            option2.innerHTML = quizQuestions[question].option2;
+            option3.innerHTML = quizQuestions[question].option3;
+            option4.innerHTML = quizQuestions[question].option4;
+        //     // if(button.innerHTML == quizQuestions[0].correctAnswer) {
+            //     button.style.background-color = #00FA9A;
+            // }
+        })
+       
+        
+    })
+});
+switch (score) {
+    case score >= 8:
+        resultMessage.innerHTML = "Good job!"
+        break;
+    case score >= 5:
+        resultMessage.innerHTML = "Nice try!"
+        break;
+    case score >= 3:
+        resultMessage.innerHTML = "Better luck next time!"
+        break;
+    default:
+        resultMessage.innerHTML = "Oh dear!"
+        break;
+}
+
