@@ -23,62 +23,101 @@ const quizQuestions = [
 ]
 
 
-const quizImage = document.querySelector(".quiz_image.src");
-const quizQuestion = document.querySelector(".quiz_question");
-const option1 = document.querySelector(".quiz_option1");
-const option2 = document.querySelector(".quiz_option2");
-const option3 = document.querySelector(".quiz_option3");
-const option4 = document.querySelector(".quiz_option4");
+const quizImage = document.querySelector(".quiz__img");
+const quizQuestion = document.querySelector(".quiz__question");
+const option1 = document.querySelector(".quiz__option1");
+const option2 = document.querySelector(".quiz__option2");
+const option3 = document.querySelector(".quiz__option3");
+const option4 = document.querySelector(".quiz__option4");
 const answerButtons = document.querySelectorAll(".answerButtons");
-const startButton = document.querySelector(".homepage_startButton");
-const resultMessage = document.querySelector(".result_message");
+const startButton = document.querySelector(".homepage__startButton");
+const resultMessage = document.querySelector(".result__message");
+const playerScore = document.querySelector(".score");
+let currentScore = 0;
+playerScore.innerHTML = "Score:" + currentScore;
 const quizSection = document.querySelector(".quiz");
 quizSection.style.display = "none";
+const resultSection = document.querySelector(".result");
+resultSection.style.display = "none";
+const homeButton = document.querySelector(".home");
+const homepage = document.querySelector(".homepage");
 
 
-startButton.addEventListener("click", () => {
-    startQuiz();
-    quizSection.style.display = "block";
-})
-
-const startQuiz = () => {
-    const homepage = document.querySelector(".homepage");
-    console.log("startquiz");
-    homepage.remove();
+// function to display a random question when the index is stated.
+const getNextQuestion = (index) => {
+    quizImage.setAttribute("src",`${quizQuestions[index].image}`);
+            quizQuestion.innerHTML = quizQuestions[index].question;
+            option1.innerHTML = quizQuestions[index].option1;
+            option2.innerHTML = quizQuestions[index].option2;
+            option3.innerHTML = quizQuestions[index].option3;
+            option4.innerHTML = quizQuestions[index].option4;
 }
 
-// quizImage = quizQuestions[0].image;
-quizQuestion.innerHTML = quizQuestions[0].question;
-option1.innerHTML = quizQuestions[0].option1;
-option2.innerHTML = quizQuestions[0].option2;
-option3.innerHTML = quizQuestions[0].option3;
-option4.innerHTML = quizQuestions[0].option4;
+// if the answer clicked = the answer to the question, turn green and add 1 to score. If wrong, turn red. After 3 seconds, colors should return to black.
+const validateAnswer = (buttonClicked) => {
+    if(buttonClicked.innerHTML == quizQuestions.correctAnswer) {
+        buttonClicked.style.color = "green";
+        console.log("green");
+        currentScore += 1;
+        setTimeout(buttonClicked.style.color = "black", 3000)
+    }
+    else {
+        buttonClicked.style.color = "red";
+        console.log("red");
+        console.log(quizQuestions.correctAnswer);
+        setTimeout(buttonClicked.style.color = "black", 3000)
+    }
+}
 
+// When startQuiz function is run, hopepage is cleared, quizSection is displayed and first fuestion in the questions array is displayed.
+const startQuiz = () => {
+    console.log("startquiz");
+    homepage.style.display = "none";
+    getNextQuestion(0);
+    quizSection.style.display = "block";
+}
+startButton.addEventListener("click", () => startQuiz());
+
+
+
+// picks a random index to display next. Adds index to array so knows not to use again. once all dislayed, move on to results screen.
+const shuffleQuestions = () => {
+    let index = Math.floor(Math.random() * 10)+1;
+    if(!usedIndex.includes(index)) {
+        getNextQuestion(index);
+        usedIndex.push(index);
+        console.log(usedIndex);
+    }
+    else if(usedIndex.length ==9) {
+        quizSection.style.display = "none";
+        resultSection.style.display = "block";
+    }
+}
+
+
+// When an answer button is clicked, the answer should be validated and coloured green/red. After 3 seconds a new index should be picked and a new question should be displayed. 
+let usedIndex = [];
 answerButtons.forEach(button => {
     button.addEventListener("click", () => {
-        // loop to next index in the questions array
-        quizQuestions.forEach(question => {
-            quizQuestion.innerHTML = quizQuestions[question].question;
-            option1.innerHTML = quizQuestions[question].option1;
-            option2.innerHTML = quizQuestions[question].option2;
-            option3.innerHTML = quizQuestions[question].option3;
-            option4.innerHTML = quizQuestions[question].option4;
-        //     // if(button.innerHTML == quizQuestions[0].correctAnswer) {
-            //     button.style.background-color = #00FA9A;
-            // }
-        })
-       
+        validateAnswer(button);
+        setTimeout(shuffleQuestions(),3000)
         
     })
-});
-switch (score) {
-    case score >= 8:
+})
+
+
+
+
+
+// When given results message depending on score.
+switch (playerScore) {
+    case playerScore >= 8:
         resultMessage.innerHTML = "Good job!"
         break;
-    case score >= 5:
+    case playerScore >= 5:
         resultMessage.innerHTML = "Nice try!"
         break;
-    case score >= 3:
+    case playerScore >= 3:
         resultMessage.innerHTML = "Better luck next time!"
         break;
     default:
@@ -86,3 +125,12 @@ switch (score) {
         break;
 }
 
+
+// When home button is clicked, quizSection and resultSection are hidden and homepage is displayed. current score returns to 0 and usedIndex is emptied.
+homeButton.addEventListener("click", () => {
+    homepage.style.display = "block";
+    quizSection.style.display = "none";
+    resultSection.style.display = "none";
+    currentScore = 0;
+    usedIndex = [];
+})
