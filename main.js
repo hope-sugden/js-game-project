@@ -41,7 +41,7 @@ const resultSection = document.querySelector(".result");
 resultSection.style.display = "none";
 const homeButton = document.querySelector(".home");
 const homepage = document.querySelector(".homepage");
-
+let currentIndex = 0;
 
 // function to display a random question when the index is stated.
 const getNextQuestion = (index) => {
@@ -55,17 +55,18 @@ const getNextQuestion = (index) => {
 
 // if the answer clicked = the answer to the question, turn green and add 1 to score. If wrong, turn red. After 3 seconds, colors should return to black.
 const validateAnswer = (buttonClicked) => {
-    if(buttonClicked.innerHTML == quizQuestions.correctAnswer) {
+    if(buttonClicked.innerHTML == quizQuestions[currentIndex].correctAnswer) {
         buttonClicked.style.color = "green";
         console.log("green");
+        console.log(quizQuestions[currentIndex].correctAnswer);
         currentScore += 1;
-        setTimeout(buttonClicked.style.color = "black", 3000)
+        setTimeout(buttonClicked.style.color = "#000", 3000)
     }
     else {
         buttonClicked.style.color = "red";
         console.log("red");
-        console.log(quizQuestions.correctAnswer);
-        setTimeout(buttonClicked.style.color = "black", 3000)
+        console.log(quizQuestions[currentIndex].correctAnswer);
+        setTimeout(buttonClicked.style.color = "#000", 3000)
     }
 }
 
@@ -74,6 +75,7 @@ const startQuiz = () => {
     console.log("startquiz");
     homepage.style.display = "none";
     getNextQuestion(0);
+    startTimer();
     quizSection.style.display = "block";
 }
 startButton.addEventListener("click", () => startQuiz());
@@ -82,11 +84,12 @@ startButton.addEventListener("click", () => startQuiz());
 
 // picks a random index to display next. Adds index to array so knows not to use again. once all dislayed, move on to results screen.
 const shuffleQuestions = () => {
-    let index = Math.floor(Math.random() * 10)+1;
-    if(!usedIndex.includes(index)) {
-        getNextQuestion(index);
-        usedIndex.push(index);
+     currentIndex = Math.floor(Math.random() * 10)+1;
+    if(!usedIndex.includes(currentIndex)) {
+        getNextQuestion(currentIndex);
+        usedIndex.push(currentIndex);
         console.log(usedIndex);
+        startTimer();
     }
     else if(usedIndex.length ==9) {
         quizSection.style.display = "none";
@@ -94,14 +97,41 @@ const shuffleQuestions = () => {
     }
 }
 
+// create a timer to count 15 seconds for each question
+var timeleft = 15;
+let questionTimer = 0;
+
+const startTimer = () => {
+    timeleft = 15;
+    questionTimer = setInterval(function(){
+        if(timeleft <= 0){
+          clearInterval(questionTimer);
+          document.querySelector(".quiz__timer").innerHTML = "Too Slow!";
+          shuffleQuestions();
+        // } else if (answerButtons.clicked == "true") {
+        //     clearInterval(downloadTimer);
+        }
+        else {
+          document.querySelector(".quiz__timer").innerHTML = timeleft + " s";
+        }
+        timeleft -= 1;
+      }, 1000);
+}
+
+const stopTimer = () => {
+    if(questionTimer) {
+        clearInterval(questionTimer);
+    }
+}
+
 
 // When an answer button is clicked, the answer should be validated and coloured green/red. After 3 seconds a new index should be picked and a new question should be displayed. 
 let usedIndex = [];
 answerButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        validateAnswer(button);
-        setTimeout(shuffleQuestions(),3000)
-        
+    button.addEventListener("click", (e) => {
+        validateAnswer(e.target);
+        stopTimer();
+        setTimeout(shuffleQuestions,3000)
     })
 })
 
@@ -133,4 +163,6 @@ homeButton.addEventListener("click", () => {
     resultSection.style.display = "none";
     currentScore = 0;
     usedIndex = [];
+    clearInterval(downloadTimer);
 })
+
