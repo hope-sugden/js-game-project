@@ -56,17 +56,21 @@ const getNextQuestion = (index) => {
 // if the answer clicked = the answer to the question, turn green and add 1 to score. If wrong, turn red. After 3 seconds, colors should return to black.
 const validateAnswer = (buttonClicked) => {
     if(buttonClicked.innerHTML == quizQuestions[currentIndex].correctAnswer) {
-        buttonClicked.style.color = "green";
+        buttonClicked.classList.add("correctAnswer");
         console.log("green");
         console.log(quizQuestions[currentIndex].correctAnswer);
+        const removeClass = buttonClicked.classList.remove("correctAnswer");
+        // setTimeout(removeClass,3000);
         currentScore += 1;
-        setTimeout(buttonClicked.style.color = "#000", 3000)
+        console.log("current score = " + currentScore);
     }
     else {
-        buttonClicked.style.color = "red";
+        buttonClicked.classList.add("wrongAnswer");
         console.log("red");
         console.log(quizQuestions[currentIndex].correctAnswer);
-        setTimeout(buttonClicked.style.color = "#000", 3000)
+        const removeClass = buttonClicked.classList.remove("wrongAnswer");
+        // setTimeout(removeClass,3000)
+        console.log("current score = " + currentScore);
     }
 }
 
@@ -163,6 +167,5 @@ homeButton.addEventListener("click", () => {
     resultSection.style.display = "none";
     currentScore = 0;
     usedIndex = [];
-    clearInterval(downloadTimer);
 })
 
