@@ -34,7 +34,7 @@ const startButton = document.querySelector(".homepage__startButton");
 const resultMessage = document.querySelector(".result__message");
 const playerScore = document.querySelector(".score");
 let currentScore = 0;
-playerScore.innerHTML = "Score:" + currentScore;
+playerScore.innerHTML = "Score: " + currentScore;
 const quizSection = document.querySelector(".quiz");
 quizSection.style.display = "none";
 const resultSection = document.querySelector(".result");
@@ -62,6 +62,7 @@ const validateAnswer = (buttonClicked) => {
         const removeClass = buttonClicked.classList.remove("correctAnswer");
         // setTimeout(removeClass,3000);
         currentScore += 1;
+        playerScore.innerHTML = "Score:" + currentScore;
         console.log("current score = " + currentScore);
     }
     else {
@@ -88,7 +89,7 @@ startButton.addEventListener("click", () => startQuiz());
 
 // picks a random index to display next. Adds index to array so knows not to use again. once all dislayed, move on to results screen.
 const shuffleQuestions = () => {
-     currentIndex = Math.floor(Math.random() * 10)+1;
+     currentIndex = Math.floor(Math.random() * 9) +1;
     if(!usedIndex.includes(currentIndex)) {
         getNextQuestion(currentIndex);
         usedIndex.push(currentIndex);
@@ -98,6 +99,9 @@ const shuffleQuestions = () => {
     else if(usedIndex.length ==9) {
         quizSection.style.display = "none";
         resultSection.style.display = "block";
+    }
+    else {
+        shuffleQuestions();
     }
 }
 
@@ -144,14 +148,14 @@ answerButtons.forEach(button => {
 
 
 // When given results message depending on score.
-switch (playerScore) {
-    case playerScore >= 8:
+switch (currentScore) {
+    case currentScore >= 8:
         resultMessage.innerHTML = "Good job!"
         break;
-    case playerScore >= 5:
+    case currentScore >= 5:
         resultMessage.innerHTML = "Nice try!"
         break;
-    case playerScore >= 3:
+    case currentScore >= 3:
         resultMessage.innerHTML = "Better luck next time!"
         break;
     default:
@@ -160,12 +164,38 @@ switch (playerScore) {
 }
 
 
+
+// switch (currentScore) {
+//     case currentScore =0:
+//         resultMessage.innerHTML = "Oh dear1!";
+//         console.log(currentScore);
+//         break;
+//     case currentScore =1:
+//         resultMessage.innerHTML = "Oh dear2!";
+//         console.log(currentScore);
+//         break;
+//     case currentScore =2:
+//         resultMessage.innerHTML = "Oh dear3!";
+//         console.log(currentScore);
+//     case currentScore =3:
+//         resultMessage.innerHTML = "Better luck next time!";
+//         console.log(currentScore);
+//         break;
+//     case currentScore =4:
+//         resultMessage.innerHTML = "Better luck next time!";
+//         console.log(currentScore);
+
+// }
+
+
+
 // When home button is clicked, quizSection and resultSection are hidden and homepage is displayed. current score returns to 0 and usedIndex is emptied.
 homeButton.addEventListener("click", () => {
     homepage.style.display = "block";
     quizSection.style.display = "none";
     resultSection.style.display = "none";
     currentScore = 0;
+    playerScore.innerHTML = "Score:" + currentScore;
     usedIndex = [];
 })
 
