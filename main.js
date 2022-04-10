@@ -42,6 +42,7 @@ resultSection.style.display = "none";
 const homeButton = document.querySelector(".home");
 const homepage = document.querySelector(".homepage");
 let currentIndex = 0;
+const finalScore = document.querySelector(".result__score");
 
 // function to display a random question when the index is stated.
 const getNextQuestion = (index) => {
@@ -59,8 +60,6 @@ const validateAnswer = (buttonClicked) => {
         buttonClicked.classList.add("correctAnswer");
         console.log("green");
         console.log(quizQuestions[currentIndex].correctAnswer);
-        const removeClass = buttonClicked.classList.remove("correctAnswer");
-        // setTimeout(removeClass,3000);
         currentScore += 1;
         playerScore.innerHTML = "Score:" + currentScore;
         console.log("current score = " + currentScore);
@@ -69,8 +68,6 @@ const validateAnswer = (buttonClicked) => {
         buttonClicked.classList.add("wrongAnswer");
         console.log("red");
         console.log(quizQuestions[currentIndex].correctAnswer);
-        const removeClass = buttonClicked.classList.remove("wrongAnswer");
-        // setTimeout(removeClass,3000)
         console.log("current score = " + currentScore);
     }
 }
@@ -85,10 +82,21 @@ const startQuiz = () => {
 }
 startButton.addEventListener("click", () => startQuiz());
 
-
+// function to remove the class so the colour of the buttons returns to white.
+const removeClassList = () => {
+    option1.classList.remove("wrongAnswer");
+    option1.classList.remove("correctAnswer");
+    option2.classList.remove("wrongAnswer");
+    option2.classList.remove("correctAnswer");
+    option3.classList.remove("wrongAnswer");
+    option3.classList.remove("correctAnswer");
+    option4.classList.remove("wrongAnswer");
+    option4.classList.remove("correctAnswer");
+}
 
 // picks a random index to display next. Adds index to array so knows not to use again. once all dislayed, move on to results screen.
 const shuffleQuestions = () => {
+    removeClassList();
      currentIndex = Math.floor(Math.random() * 9) +1;
     if(!usedIndex.includes(currentIndex)) {
         getNextQuestion(currentIndex);
@@ -99,6 +107,9 @@ const shuffleQuestions = () => {
     else if(usedIndex.length ==9) {
         quizSection.style.display = "none";
         resultSection.style.display = "block";
+        createResultMessage();
+        playerScore.style.display = "none";
+        finalScore.innerHTML = currentScore + "/10";
     }
     else {
         shuffleQuestions();
@@ -116,8 +127,6 @@ const startTimer = () => {
           clearInterval(questionTimer);
           document.querySelector(".quiz__timer").innerHTML = "Too Slow!";
           shuffleQuestions();
-        // } else if (answerButtons.clicked == "true") {
-        //     clearInterval(downloadTimer);
         }
         else {
           document.querySelector(".quiz__timer").innerHTML = timeleft + " s";
@@ -145,47 +154,35 @@ answerButtons.forEach(button => {
 
 
 
-
-
-// When given results message depending on score.
-switch (currentScore) {
-    case currentScore >= 8:
-        resultMessage.innerHTML = "Good job!"
+const createResultMessage = () => {
+    switch (currentScore) {
+    case 0:
+    case 1:
+    case 2:
+        resultMessage.innerHTML = "Oh dear!";
+        console.log("Final score is " + currentScore);
         break;
-    case currentScore >= 5:
-        resultMessage.innerHTML = "Nice try!"
+    
+    case 3:
+    case 4:
+        resultMessage.innerHTML = "Better luck next time!";
+        console.log(currentScore);
         break;
-    case currentScore >= 3:
-        resultMessage.innerHTML = "Better luck next time!"
+    case 5:
+    case 6:
+    case 7:
+        resultMessage.innerHTML = "Nice try!";
+        console.log(currentScore);
         break;
+    case 8:
+    case 9:
+    case 10:
+        resultMessage.innerHTML = "Good job!";
+         break;
     default:
-        resultMessage.innerHTML = "Oh dear!"
-        break;
-}
+            resultMessage.innerHTML = "There's a problem";
 
-
-
-// switch (currentScore) {
-//     case currentScore =0:
-//         resultMessage.innerHTML = "Oh dear1!";
-//         console.log(currentScore);
-//         break;
-//     case currentScore =1:
-//         resultMessage.innerHTML = "Oh dear2!";
-//         console.log(currentScore);
-//         break;
-//     case currentScore =2:
-//         resultMessage.innerHTML = "Oh dear3!";
-//         console.log(currentScore);
-//     case currentScore =3:
-//         resultMessage.innerHTML = "Better luck next time!";
-//         console.log(currentScore);
-//         break;
-//     case currentScore =4:
-//         resultMessage.innerHTML = "Better luck next time!";
-//         console.log(currentScore);
-
-// }
+}}
 
 
 
@@ -194,8 +191,10 @@ homeButton.addEventListener("click", () => {
     homepage.style.display = "block";
     quizSection.style.display = "none";
     resultSection.style.display = "none";
+    playerScore.style.display = "block";
     currentScore = 0;
     playerScore.innerHTML = "Score:" + currentScore;
     usedIndex = [];
+    stopTimer();
 })
 
