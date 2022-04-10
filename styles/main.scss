@@ -1,16 +1,5 @@
-.quiz {
-    &__img {
-        width: 50%;
-    }
-}
-
-
-.correctAnswer {
-    background-color: green;
-}
-
-
-
-.wrongAnswer {
-    background-color: red;
-}
+@import "./base";
+@import "./layout/buttons";
+@import "./layout/homepage";
+@import "./layout/quiz";
+@import "./layout/results";
