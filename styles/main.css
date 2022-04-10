@@ -1,5 +1,8 @@
-.quiz__img {
-  width: 50%;
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
+* {
+  background-color: #e0fbfc;
+  color: #3d5a80;
+  font-family: "Dosis", sans-serif;
 }
 
 .correctAnswer {
@@ -8,4 +11,23 @@
 
 .wrongAnswer {
   background-color: red;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+}
+nav .home {
+  height: 50px;
+  border: none;
+}
+
+.homepage {
+  text-align: center;
+}
+
+.quiz__img {
+  width: 50%;
 }

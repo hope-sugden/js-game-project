@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
+$dark-blue: #3d5a80;
+$medium-blue: #98c1d9;
+$light-blue: #e0fbfc;
+
+$black: #00171f;
+$red-wrong: #ff5733 ;
+$green-correct: #afe1af;
+
+$primary-font:'Dosis', sans-serif;
+
+* {
+    background-color: $light-blue;
+    color:$dark-blue;
+    font-family: $primary-font;
+}
