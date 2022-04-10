@@ -43,6 +43,10 @@ const homeButton = document.querySelector(".home");
 const homepage = document.querySelector(".homepage");
 let currentIndex = 0;
 const finalScore = document.querySelector(".result__score");
+let usedIndex = [];
+const questionNumber = document.querySelector(".quiz__qNumber");
+let question = 1
+questionNumber.innerHTML = "Question " + question;
 
 // function to display a random question when the index is stated.
 const getNextQuestion = (index) => {
@@ -61,7 +65,7 @@ const validateAnswer = (buttonClicked) => {
         console.log("green");
         console.log(quizQuestions[currentIndex].correctAnswer);
         currentScore += 1;
-        playerScore.innerHTML = "Score:" + currentScore;
+        playerScore.innerHTML = "Score: " + currentScore;
         console.log("current score = " + currentScore);
     }
     else {
@@ -103,6 +107,8 @@ const shuffleQuestions = () => {
         usedIndex.push(currentIndex);
         console.log(usedIndex);
         startTimer();
+        question +=1;
+        questionNumber.innerHTML = "Question " + question;
     }
     else if(usedIndex.length ==9) {
         quizSection.style.display = "none";
@@ -143,7 +149,7 @@ const stopTimer = () => {
 
 
 // When an answer button is clicked, the answer should be validated and coloured green/red. After 3 seconds a new index should be picked and a new question should be displayed. 
-let usedIndex = [];
+
 answerButtons.forEach(button => {
     button.addEventListener("click", (e) => {
         validateAnswer(e.target);
@@ -193,8 +199,9 @@ homeButton.addEventListener("click", () => {
     resultSection.style.display = "none";
     playerScore.style.display = "block";
     currentScore = 0;
-    playerScore.innerHTML = "Score:" + currentScore;
+    playerScore.innerHTML = "Score: " + currentScore;
     usedIndex = [];
     stopTimer();
+    question = 1;
 })
 
