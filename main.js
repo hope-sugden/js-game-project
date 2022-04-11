@@ -81,6 +81,7 @@ const startQuiz = () => {
     console.log("startquiz");
     homepage.style.display = "none";
     getNextQuestion(0);
+    console.log(currentIndex);
     startTimer();
     quizSection.style.display = "block";
 }
@@ -203,5 +204,6 @@ homeButton.addEventListener("click", () => {
     usedIndex = [];
     stopTimer();
     question = 1;
+    currentIndex = 0;
 })
 

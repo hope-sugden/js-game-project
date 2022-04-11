@@ -1,10 +1,79 @@
 .correctAnswer {
-    background-color: green;
+    background-color: $green-correct;
 }
 
 
 
 .wrongAnswer {
-    background-color: red;
+    background-color: $red-wrong;
 }
 
+
+.home:active {
+    box-shadow: 2px 2px 2px 2px $dark-blue inset;
+}
+.homepage {
+    &__startButton {
+        background-color: $medium-blue;
+        border: none;
+        border-radius: 10px;
+        width: 20%;
+        height: 10%;
+        font-size: 100%;
+    }
+    &__startButton:active {
+        box-shadow: 2px 2px 2px 2px $dark-blue inset;
+    }
+}
+
+.quiz {
+    &__option1 {
+        background-color: $medium-blue;
+        border: none;
+        border-radius: 10px;
+        width: 25%;
+        height: 10%;
+        font-size: 100%;
+        margin: 3%;
+    }
+    &__option1:active{
+        box-shadow: 2px 2px 2px 2px $dark-blue inset;
+    }
+    &__option2 {
+        background-color: $medium-blue;
+        border: none;
+        border-radius: 10px;
+        width: 25%;
+        height: 10%;
+        font-size: 100%;
+        margin: 3%;
+    }
+    &__option2:active{
+        box-shadow: 2px 2px 2px 2px $dark-blue inset;
+    }
+    &__option3 {
+        background-color: $medium-blue;
+        border: none;
+        border-radius: 10px;
+        width: 25%;
+        height: 10%;
+        font-size: 100%;
+        margin: 3%;
+    }
+    &__option3:active{
+        box-shadow: 2px 2px 2px 2px $dark-blue inset;
+    }
+    &__option4 {
+        background-color: $medium-blue;
+        border: none;
+        border-radius: 10px;
+        width: 25%;
+        height: 10%;
+        font-size: 100%;
+        margin: 3%;
+    }
+    &__option4:active{
+        box-shadow: 2px 2px 2px 2px $dark-blue inset;
+    }
+    
+}
