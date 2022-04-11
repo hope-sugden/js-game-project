@@ -25,11 +25,11 @@ const quizQuestions = [
 
 const quizImage = document.querySelector(".quiz__img");
 const quizQuestion = document.querySelector(".quiz__question");
-const option1 = document.querySelector(".quiz__option1");
-const option2 = document.querySelector(".quiz__option2");
-const option3 = document.querySelector(".quiz__option3");
-const option4 = document.querySelector(".quiz__option4");
-const answerButtons = document.querySelectorAll(".answerButtons");
+const option1 = document.querySelector("#option1");
+const option2 = document.querySelector("#option2");
+const option3 = document.querySelector("#option3");
+const option4 = document.querySelector("#option4");
+const answerButtons = document.querySelectorAll(".quiz__buttons");
 const startButton = document.querySelector(".homepage__startButton");
 const resultMessage = document.querySelector(".result__message");
 const playerScore = document.querySelector(".score");
@@ -62,7 +62,8 @@ const getNextQuestion = (index) => {
 const validateAnswer = (buttonClicked) => {
     if(buttonClicked.innerHTML == quizQuestions[currentIndex].correctAnswer) {
         buttonClicked.classList.add("correctAnswer");
-        console.log("green");
+        buttonClicked.classList.remove("quiz__buttons");
+        console.log(buttonClicked.classList);
         console.log(quizQuestions[currentIndex].correctAnswer);
         currentScore += 1;
         playerScore.innerHTML = "Score: " + currentScore;
@@ -70,6 +71,7 @@ const validateAnswer = (buttonClicked) => {
     }
     else {
         buttonClicked.classList.add("wrongAnswer");
+        buttonClicked.classList.remove("quiz__buttons");
         console.log("red");
         console.log(quizQuestions[currentIndex].correctAnswer);
         console.log("current score = " + currentScore);
@@ -91,12 +93,16 @@ startButton.addEventListener("click", () => startQuiz());
 const removeClassList = () => {
     option1.classList.remove("wrongAnswer");
     option1.classList.remove("correctAnswer");
+    option1.classList.add("quiz__buttons");
     option2.classList.remove("wrongAnswer");
     option2.classList.remove("correctAnswer");
+    option2.classList.add("quiz__buttons");
     option3.classList.remove("wrongAnswer");
     option3.classList.remove("correctAnswer");
+    option3.classList.add("quiz__buttons");
     option4.classList.remove("wrongAnswer");
     option4.classList.remove("correctAnswer");
+    option4.classList.add("quiz__buttons");
 }
 
 // picks a random index to display next. Adds index to array so knows not to use again. once all dislayed, move on to results screen.

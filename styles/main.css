@@ -7,10 +7,22 @@
 
 .correctAnswer {
   background-color: #afe1af;
+  border: none;
+  border-radius: 10px;
+  width: 25%;
+  height: 10%;
+  font-size: 100%;
+  margin: 3%;
 }
 
 .wrongAnswer {
   background-color: #ff5733;
+  border: none;
+  border-radius: 10px;
+  width: 25%;
+  height: 10%;
+  font-size: 100%;
+  margin: 3%;
 }
 
 .home:active {
@@ -29,7 +41,7 @@
   box-shadow: 2px 2px 2px 2px #3d5a80 inset;
 }
 
-.quiz__option1 {
+.quiz__buttons {
   background-color: #98c1d9;
   border: none;
   border-radius: 10px;
@@ -38,43 +50,7 @@
   font-size: 100%;
   margin: 3%;
 }
-.quiz__option1:active {
-  box-shadow: 2px 2px 2px 2px #3d5a80 inset;
-}
-.quiz__option2 {
-  background-color: #98c1d9;
-  border: none;
-  border-radius: 10px;
-  width: 25%;
-  height: 10%;
-  font-size: 100%;
-  margin: 3%;
-}
-.quiz__option2:active {
-  box-shadow: 2px 2px 2px 2px #3d5a80 inset;
-}
-.quiz__option3 {
-  background-color: #98c1d9;
-  border: none;
-  border-radius: 10px;
-  width: 25%;
-  height: 10%;
-  font-size: 100%;
-  margin: 3%;
-}
-.quiz__option3:active {
-  box-shadow: 2px 2px 2px 2px #3d5a80 inset;
-}
-.quiz__option4 {
-  background-color: #98c1d9;
-  border: none;
-  border-radius: 10px;
-  width: 25%;
-  height: 10%;
-  font-size: 100%;
-  margin: 3%;
-}
-.quiz__option4:active {
+.quiz__buttons:active {
   box-shadow: 2px 2px 2px 2px #3d5a80 inset;
 }
 
