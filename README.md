@@ -16,3 +16,4 @@ _This is the link to the quiz https://hope-sugden.github.io/js-game-project/_
 ### The home button can be pressed at any time which will reset the quiz so it can be replayed as many times as you like.
 
 
+<img width="539" alt="Screenshot 2022-04-11 at 17 15 25" src="https://user-images.githubusercontent.com/100870944/162785205-91bf3413-7d98-4358-892a-dbd086ba850d.png">
