@@ -89,7 +89,7 @@ const startQuiz = () => {
 }
 startButton.addEventListener("click", () => startQuiz());
 
-// function to remove the class so the colour of the buttons returns to white.
+// function to remove the answer button class and reasign the quiz button class so the colour of the buttons returns to white.
 const removeClassList = () => {
     option1.classList.remove("wrongAnswer");
     option1.classList.remove("correctAnswer");
@@ -129,7 +129,7 @@ const shuffleQuestions = () => {
     }
 }
 
-// create a timer to count 15 seconds for each question
+// create a timer to count 15 seconds for each question and a function to stop the timer when needed.
 var timeleft = 15;
 let questionTimer = 0;
 
@@ -166,7 +166,7 @@ answerButtons.forEach(button => {
 })
 
 
-
+// A switch case to provide a result message depending on the score.
 const createResultMessage = () => {
     switch (currentScore) {
     case 0:
@@ -189,8 +189,10 @@ const createResultMessage = () => {
         break;
     case 8:
     case 9:
+        resultMessage.innerHTML = "Goob job!";
+        break;
     case 10:
-        resultMessage.innerHTML = "Good job!";
+        resultMessage.innerHTML = "You're a star!";
          break;
     default:
             resultMessage.innerHTML = "There's a problem";
@@ -212,4 +214,3 @@ homeButton.addEventListener("click", () => {
     question = 1;
     currentIndex = 0;
 })
-
