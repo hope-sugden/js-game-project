@@ -161,7 +161,7 @@ answerButtons.forEach(button => {
     button.addEventListener("click", (e) => {
         validateAnswer(e.target);
         stopTimer();
-        setTimeout(shuffleQuestions,3000)
+        setTimeout(shuffleQuestions,1000)
     })
 })
 
