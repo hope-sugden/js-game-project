@@ -45,7 +45,7 @@ let currentIndex = 0;
 const finalScore = document.querySelector(".result__score");
 let usedIndex = [];
 const questionNumber = document.querySelector(".quiz__qNumber");
-let question = 1
+let question = 1;
 questionNumber.innerHTML = "Question " + question;
 
 // function to display a random question when the index is stated.
@@ -212,5 +212,6 @@ homeButton.addEventListener("click", () => {
     usedIndex = [];
     stopTimer();
     question = 1;
+    questionNumber.innerHTML = "Question " + question;
     currentIndex = 0;
 })
