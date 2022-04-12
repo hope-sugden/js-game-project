@@ -15,5 +15,8 @@ _This is the link to the quiz https://hope-sugden.github.io/js-game-project/_
 ### Your final score will display in the results page after all the questions have been answered, with a message depending on your score. 
 ### The home button can be pressed at any time which will reset the quiz so it can be replayed as many times as you like.
 
+## **Limitations**
+
+### If the user double clicks and answer or clicks 2 options to a question then the following question is skipped and the timer counts double speed.
 
 <img width="539" alt="Screenshot 2022-04-11 at 17 15 25" src="https://user-images.githubusercontent.com/100870944/162785205-91bf3413-7d98-4358-892a-dbd086ba850d.png">
